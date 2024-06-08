@@ -3,7 +3,6 @@ import 'package:crud_auth/app/core/services/auth_service.dart';
 import 'package:crud_auth/app/models/dto/user_dto.dart';
 import 'package:crud_auth/app/modules/auth/pages/controllers/auth_route_controller.dart';
 import 'package:crud_auth/app/shared/validators/validator.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -57,20 +56,21 @@ abstract class AuthControllerBase with Store {
 
   @action
   login() async {
-    hideKeyboard();
+    _loadingController.startLoading();
 
     UserDTO user = UserDTO(
       login: userController.text,
       password: passwordController.text,
     );
 
-    _loadingController.startLoading();
-    await _authService.login(user).then(
-      (value) {
-        clearAllInputs();
-        _routeController.goToHome();
-      },
-    );
+    try {
+      await _authService.login(user);
+      clearAllInputs();
+      _routeController.goToHome();
+    } on FlutterError catch (e) {
+      _loadingController.stopLoading();
+      EasyLoading.showError(e.message);
+    }
 
     _loadingController.stopLoading();
   }

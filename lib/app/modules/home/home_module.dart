@@ -1,4 +1,5 @@
 import 'package:crud_auth/app/app_module.dart';
+import 'package:crud_auth/app/core/services/product_service.dart';
 import 'package:crud_auth/app/core/services/shared_local_storage_service.dart';
 import 'package:crud_auth/app/modules/home/components/navigation/custom_navigation_bar.dart';
 import 'package:crud_auth/app/modules/home/controllers/navigation_controller.dart';
@@ -19,7 +20,8 @@ class HomeModule extends Module {
   @override
   void binds(i) {
     i.addLazySingleton(() => NavigationController());
-    i.addLazySingleton(() => ProductController());
+    i.addLazySingleton(() => ProductService(i()));
+    i.addLazySingleton(() => ProductController(i(), i(), i()));
     i.addLazySingleton(() => ProfileController(i()));
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class CustomButton extends StatelessWidget {
   final String title;
@@ -16,11 +17,20 @@ class CustomButton extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.amber,
+        side: const BorderSide(color: Colors.black, width: 2),
         maximumSize: Size((width ?? size.width * 0.8), 50),
       ),
       onPressed: onPressed,
       child: Center(
-        child: Text(title),
+        child: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: Colors.black,
+          ),
+        ),
       ),
     );
   }

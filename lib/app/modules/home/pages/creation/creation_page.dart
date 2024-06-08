@@ -1,6 +1,11 @@
+import 'package:crud_auth/app/components/button/custom_button.dart';
+import 'package:crud_auth/app/components/icon/header_icon.dart';
+import 'package:crud_auth/app/components/input/custom_input.dart';
 import 'package:crud_auth/app/components/screen/base_screen.dart';
+import 'package:crud_auth/app/components/scrollable/no_glow.dart';
 import 'package:crud_auth/app/modules/home/controllers/product_controller.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:crud_auth/app/shared/validators/validator.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class CreationPage extends StatelessWidget {
@@ -9,9 +14,37 @@ class CreationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const BaseScreen(
+    return BaseScreen(
       title: 'Cadastro',
-      child: Center(),
+      child: ScrollConfiguration(
+        behavior: NoGlow(),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const HeaderIcon(
+                icon: Icons.shopping_cart,
+              ),
+              CustomInput(
+                controller: _controller.nameController,
+                validator: Validator.requiredName,
+                hintText: 'Nome do Produto',
+                prefixIcon: const Icon(Icons.local_mall),
+              ),
+              CustomInput(
+                controller: _controller.priceController,
+                validator: Validator.requiredValidPrice,
+                keyboardType: TextInputType.number,
+                hintText: 'Preço do produto',
+                prefixIcon: const Icon(Icons.payments),
+              ),
+              CustomButton(
+                title: 'Salvar Produto',
+                onPressed: () {},
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

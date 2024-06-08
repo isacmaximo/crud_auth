@@ -19,15 +19,21 @@ class BaseScreen extends StatelessWidget {
         canPop: false,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.indigo,
+            elevation: 2,
+            backgroundColor: Colors.amber.shade600,
             centerTitle: true,
             title: Text(
               title,
               style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                  shadows: [
+                    Shadow(
+                      offset: Offset(1, 1),
+                      blurRadius: 2,
+                    ),
+                  ]),
             ),
             leading: onTapBack != null
                 ? IconButton(

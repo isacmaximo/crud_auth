@@ -47,6 +47,7 @@ class LoginPage extends StatelessWidget {
                 title: 'Entrar',
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
+                    _controller.hideKeyboard();
                     await _controller.login();
                   }
                 },

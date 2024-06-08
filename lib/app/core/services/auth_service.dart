@@ -3,7 +3,7 @@ import 'package:crud_auth/app/core/services/jwt_service.dart';
 import 'package:crud_auth/app/models/dto/user_dto.dart';
 import 'package:crud_auth/app/shared/constants.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter/material.dart';
 
 class AuthService {
   final HttpClient _client;
@@ -22,7 +22,7 @@ class AuthService {
       response = await _client.post(url, data: userDTO.toMap());
     } on DioException catch (e) {
       if (e.response != null && [400, 404].contains(e.response!.statusCode)) {
-        EasyLoading.showError(e.response!.data['message'].toString());
+        throw FlutterError(e.response!.data['message'].toString());
       }
     }
 
@@ -41,7 +41,7 @@ class AuthService {
       response = await _client.post(url, data: userDTO.toMap());
     } on DioException catch (e) {
       if (e.response != null && [400, 500].contains(e.response!.statusCode)) {
-        EasyLoading.showError(e.response!.data['message'].toString());
+        throw FlutterError(e.response!.data['message'].toString());
       }
     }
 

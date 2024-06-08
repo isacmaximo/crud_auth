@@ -7,6 +7,7 @@ class CustomInput extends StatelessWidget {
   final double? width;
   final bool? obscureText;
   final Widget? prefixIcon;
+  final TextInputType? keyboardType;
   const CustomInput({
     super.key,
     this.controller,
@@ -15,6 +16,7 @@ class CustomInput extends StatelessWidget {
     this.validator,
     this.obscureText,
     this.prefixIcon,
+    this.keyboardType,
   });
 
   @override
@@ -27,6 +29,7 @@ class CustomInput extends StatelessWidget {
         controller: controller,
         validator: validator,
         obscureText: obscureText ?? false,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
           isDense: true,
           hintText: hintText,

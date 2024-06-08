@@ -15,7 +15,13 @@ class RowGoToRegister extends StatelessWidget {
         const Text('Não possui login?'),
         TextButton(
           onPressed: onPressed,
-          child: const Text('Cadastre-se'),
+          child: const Text(
+            'Cadastre-se',
+            style: TextStyle(
+              color: Colors.blueGrey,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
         ),
       ],
     );
