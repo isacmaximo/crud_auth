@@ -57,6 +57,23 @@ mixin _$ProductController on ProductControllerBase, Store {
     return _$updateProductAsyncAction.run(() => super.updateProduct(product));
   }
 
+  late final _$onTapDeleteAsyncAction =
+      AsyncAction('ProductControllerBase.onTapDelete', context: context);
+
+  @override
+  Future onTapDelete(int index, BuildContext context) {
+    return _$onTapDeleteAsyncAction
+        .run(() => super.onTapDelete(index, context));
+  }
+
+  late final _$deleteProductAsyncAction =
+      AsyncAction('ProductControllerBase.deleteProduct', context: context);
+
+  @override
+  Future<void> deleteProduct(int id) {
+    return _$deleteProductAsyncAction.run(() => super.deleteProduct(id));
+  }
+
   late final _$ProductControllerBaseActionController =
       ActionController(name: 'ProductControllerBase', context: context);
 

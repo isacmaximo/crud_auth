@@ -4,6 +4,7 @@ import 'package:crud_auth/app/core/services/product_service.dart';
 import 'package:crud_auth/app/models/dto/product_dto.dart';
 import 'package:crud_auth/app/models/store/product_store_dto.dart';
 import 'package:crud_auth/app/modules/home/components/dialog/edit_dialog.dart';
+import 'package:crud_auth/app/modules/home/components/dialog/info_dialog.dart';
 import 'package:crud_auth/app/shared/util/currency_util.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter/material.dart';
@@ -127,6 +128,42 @@ abstract class ProductControllerBase with Store {
       _loadingController.stopLoading();
       EasyLoading.showError(e.message);
     }
+    _loadingController.stopLoading();
+  }
+
+  @action
+  onTapDelete(int index, BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return InfoDialog(
+          info: 'Você realmente deseja remover:\n'
+              '${listPrduct[index].name}\n'
+              'da sua lista de produtos?',
+          onPressedLeft: () async {
+            await deleteProduct(listPrduct[index].id!);
+          },
+          onPressedRight: Modular.to.pop,
+        );
+      },
+    ).then((value) => clearAllFields());
+  }
+
+  @action
+  Future<void> deleteProduct(int id) async {
+    _loadingController.startLoading();
+
+    hideKeyboard();
+
+    try {
+      await _productService.deleteProduct(id).then((_) => loadAllProducts());
+      Modular.to.pop();
+      EasyLoading.showSuccess('Produto deletado com sucesso!');
+    } on FlutterError catch (e) {
+      _loadingController.stopLoading();
+      EasyLoading.showError(e.message);
+    }
+
     _loadingController.stopLoading();
   }
 }

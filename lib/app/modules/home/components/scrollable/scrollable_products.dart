@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ScrollableProducts extends StatelessWidget {
   final List<ProductStore> products;
   final void Function(int index, BuildContext context)? onPressedEdit;
-  final void Function(ProductStore product)? onPressedDelete;
+  final void Function(int index, BuildContext context)? onPressedDelete;
   const ScrollableProducts({
     super.key,
     required this.products,
@@ -23,7 +23,7 @@ class ScrollableProducts extends StatelessWidget {
             name: products[index].name!,
             price: products[index].price!,
             onPressedEdit: () => onPressedEdit!(index, context),
-            onPressedDelete: () => onPressedDelete,
+            onPressedDelete: () => onPressedDelete!(index, context),
           );
         },
       ),

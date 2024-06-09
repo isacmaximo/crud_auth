@@ -23,10 +23,18 @@ class ManagementPage extends StatelessWidget {
           ScrollConfiguration(
             behavior: NoGlow(),
             child: Observer(
-              builder: (_) => ScrollableProducts(
-                products: _controller.listPrduct,
-                onPressedEdit: _controller.onTapEdit,
-              ),
+              builder: (_) => _controller.listPrduct.isNotEmpty
+                  ? ScrollableProducts(
+                      products: _controller.listPrduct,
+                      onPressedEdit: _controller.onTapEdit,
+                      onPressedDelete: _controller.onTapDelete,
+                    )
+                  : const Center(
+                      child: Text(
+                        'Não há produdos cadastrados!',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
             ),
           ),
         ],
