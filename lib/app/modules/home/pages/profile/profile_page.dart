@@ -1,6 +1,8 @@
+import 'package:crud_auth/app/components/icon/header_icon.dart';
 import 'package:crud_auth/app/components/screen/base_screen.dart';
 import 'package:crud_auth/app/modules/home/controllers/profile_controller.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../components/button/custom_button.dart';
@@ -16,11 +18,23 @@ class ProfilePage extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
+            const Spacer(
+              flex: 1,
+            ),
+            const HeaderIcon(
+              icon: Icons.person,
+            ),
+            const Spacer(
+              flex: 2,
+            ),
             CustomButton(
               title: 'Sair',
               onPressed: () async {
                 await _controller.logout();
               },
+            ),
+            const Spacer(
+              flex: 1,
             ),
           ],
         ),

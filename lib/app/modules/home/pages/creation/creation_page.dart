@@ -14,6 +14,7 @@ class CreationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return BaseScreen(
       title: 'Cadastro',
       child: ScrollConfiguration(
@@ -37,9 +38,12 @@ class CreationPage extends StatelessWidget {
                 hintText: 'Preço do produto',
                 prefixIcon: const Icon(Icons.payments),
               ),
-              CustomButton(
-                title: 'Salvar Produto',
-                onPressed: () {},
+              Padding(
+                padding: EdgeInsets.only(top: size.width * 0.05),
+                child: CustomButton(
+                  title: 'Salvar Produto',
+                  onPressed: () {},
+                ),
               )
             ],
           ),

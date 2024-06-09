@@ -14,21 +14,34 @@ class CustomNavigationBar extends StatelessWidget {
     return Observer(
       builder: (_) => Scaffold(
         bottomNavigationBar: BottomNavigationBar(
+          elevation: 2,
+          backgroundColor: Colors.amber,
           currentIndex: _controller.currentPage,
           showSelectedLabels: false,
           showUnselectedLabels: false,
+          selectedItemColor: Colors.white,
+          iconSize: 30,
           onTap: _controller.onSelectPage,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(
+                Icons.home,
+                shadows: [Shadow(offset: Offset(1, 1))],
+              ),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.app_registration),
+              icon: Icon(
+                Icons.app_registration,
+                shadows: [Shadow(offset: Offset(1, 1))],
+              ),
               label: '',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Icon(
+                Icons.person,
+                shadows: [Shadow(offset: Offset(1, 1))],
+              ),
               label: '',
             ),
           ],
