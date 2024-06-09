@@ -1,7 +1,9 @@
 import 'package:crud_auth/app/core/globlal_loading/loading_controller.dart';
 import 'package:crud_auth/app/core/services/jwt_service.dart';
 import 'package:crud_auth/app/core/services/product_service.dart';
+import 'package:crud_auth/app/models/dto/product_dto.dart';
 import 'package:crud_auth/app/models/store/product_store_dto.dart';
+import 'package:crud_auth/app/shared/util/currency_util.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -31,6 +33,16 @@ abstract class ProductControllerBase with Store {
     leftSymbol: 'R\$ ',
   );
 
+  @action
+  hideKeyboard() {
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
+
+  clearAllFields() {
+    nameController.clear();
+    priceController.clear();
+  }
+
   @observable
   ObservableList<ProductStore> listPrduct = ObservableList<ProductStore>.of([]);
 
@@ -38,19 +50,40 @@ abstract class ProductControllerBase with Store {
   loadAllProducts() async {
     _loadingController.startLoading();
     try {
-      await _productService.getAllProducts().then(
-        (listDto) {
-          for (var e in listDto) {
-            listPrduct.add(
-              ProductStore(
-                id: e.id,
-                name: e.name,
-                price: e.price,
+      var listDTO = await _productService.getAllProducts();
+      listPrduct = ObservableList<ProductStore>.of(
+        listDTO
+            .map(
+              (dto) => ProductStore(
+                id: dto.id,
+                name: dto.name,
+                price: dto.price,
               ),
-            );
-          }
-        },
+            )
+            .toList(),
       );
+    } on FlutterError catch (e) {
+      _loadingController.stopLoading();
+      EasyLoading.showError(e.message);
+    }
+    _loadingController.stopLoading();
+  }
+
+  @action
+  registerProduct() async {
+    _loadingController.startLoading();
+    hideKeyboard();
+
+    try {
+      await _productService.saveProduct(ProductDTO(
+        name: nameController.text,
+        price: CurrencyUtil.parseCurrency(
+          priceController.text,
+        ),
+      ));
+      await loadAllProducts();
+      clearAllFields();
+      EasyLoading.showSuccess('Produto salvo com sucesso!');
     } on FlutterError catch (e) {
       _loadingController.stopLoading();
       EasyLoading.showError(e.message);

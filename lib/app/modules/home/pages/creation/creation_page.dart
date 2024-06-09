@@ -10,6 +10,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class CreationPage extends StatelessWidget {
   final _controller = Modular.get<ProductController>();
+  final _formKey = GlobalKey<FormState>();
   CreationPage({super.key});
 
   @override
@@ -20,32 +21,39 @@ class CreationPage extends StatelessWidget {
       child: ScrollConfiguration(
         behavior: NoGlow(),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const HeaderIcon(
-                icon: Icons.shopping_cart,
-              ),
-              CustomInput(
-                controller: _controller.nameController,
-                validator: Validator.requiredName,
-                hintText: 'Nome do Produto',
-                prefixIcon: const Icon(Icons.local_mall),
-              ),
-              CustomInput(
-                controller: _controller.priceController,
-                validator: Validator.requiredValidPrice,
-                keyboardType: TextInputType.number,
-                hintText: 'Preço do produto',
-                prefixIcon: const Icon(Icons.payments),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: size.width * 0.05),
-                child: CustomButton(
-                  title: 'Salvar Produto',
-                  onPressed: () {},
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const HeaderIcon(
+                  icon: Icons.shopping_cart,
                 ),
-              )
-            ],
+                CustomInput(
+                  controller: _controller.nameController,
+                  validator: Validator.requiredName,
+                  hintText: 'Nome do Produto',
+                  prefixIcon: const Icon(Icons.local_mall),
+                ),
+                CustomInput(
+                  controller: _controller.priceController,
+                  validator: Validator.requiredValidPrice,
+                  keyboardType: TextInputType.number,
+                  hintText: 'Preço do produto',
+                  prefixIcon: const Icon(Icons.payments),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: size.width * 0.05),
+                  child: CustomButton(
+                    title: 'Salvar Produto',
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        await _controller.registerProduct();
+                      }
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

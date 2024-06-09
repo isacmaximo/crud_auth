@@ -33,6 +33,28 @@ mixin _$ProductController on ProductControllerBase, Store {
     return _$loadAllProductsAsyncAction.run(() => super.loadAllProducts());
   }
 
+  late final _$registerProductAsyncAction =
+      AsyncAction('ProductControllerBase.registerProduct', context: context);
+
+  @override
+  Future registerProduct() {
+    return _$registerProductAsyncAction.run(() => super.registerProduct());
+  }
+
+  late final _$ProductControllerBaseActionController =
+      ActionController(name: 'ProductControllerBase', context: context);
+
+  @override
+  dynamic hideKeyboard() {
+    final _$actionInfo = _$ProductControllerBaseActionController.startAction(
+        name: 'ProductControllerBase.hideKeyboard');
+    try {
+      return super.hideKeyboard();
+    } finally {
+      _$ProductControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

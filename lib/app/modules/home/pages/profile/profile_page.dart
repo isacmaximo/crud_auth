@@ -1,7 +1,6 @@
 import 'package:crud_auth/app/components/icon/header_icon.dart';
 import 'package:crud_auth/app/components/screen/base_screen.dart';
 import 'package:crud_auth/app/modules/home/controllers/profile_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

@@ -1,4 +1,3 @@
-import 'package:crud_auth/app/models/dto/product_dto.dart';
 import 'package:mobx/mobx.dart';
 part 'product_store_dto.g.dart';
 
@@ -17,12 +16,4 @@ abstract class ProductStoreBase with Store {
     this.name,
     this.price,
   });
-
-  factory ProductStoreBase.fromProductDTO(ProductDTO dto) {
-    return ProductStore(
-      id: dto.id,
-      name: dto.name,
-      price: dto.price,
-    );
-  }
 }
