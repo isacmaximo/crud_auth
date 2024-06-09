@@ -41,6 +41,22 @@ mixin _$ProductController on ProductControllerBase, Store {
     return _$registerProductAsyncAction.run(() => super.registerProduct());
   }
 
+  late final _$onTapEditAsyncAction =
+      AsyncAction('ProductControllerBase.onTapEdit', context: context);
+
+  @override
+  Future onTapEdit(int index, BuildContext context) {
+    return _$onTapEditAsyncAction.run(() => super.onTapEdit(index, context));
+  }
+
+  late final _$updateProductAsyncAction =
+      AsyncAction('ProductControllerBase.updateProduct', context: context);
+
+  @override
+  Future<void> updateProduct(ProductDTO product) {
+    return _$updateProductAsyncAction.run(() => super.updateProduct(product));
+  }
+
   late final _$ProductControllerBaseActionController =
       ActionController(name: 'ProductControllerBase', context: context);
 

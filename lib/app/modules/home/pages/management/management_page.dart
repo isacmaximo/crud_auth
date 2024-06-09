@@ -15,22 +15,21 @@ class ManagementPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseScreen(
       title: 'Gerenciamento',
-      child: ScrollConfiguration(
-        behavior: NoGlow(),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const HeaderIcon(
-                icon: Icons.data_saver_off,
-              ),
-              Observer(
-                builder: (_) => ScrollableProducts(
-                  products: _controller.listPrduct,
-                ),
-              ),
-            ],
+      child: Column(
+        children: [
+          const HeaderIcon(
+            icon: Icons.data_saver_off,
           ),
-        ),
+          ScrollConfiguration(
+            behavior: NoGlow(),
+            child: Observer(
+              builder: (_) => ScrollableProducts(
+                products: _controller.listPrduct,
+                onPressedEdit: _controller.onTapEdit,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -3,10 +3,12 @@ import 'package:crud_auth/app/core/services/jwt_service.dart';
 import 'package:crud_auth/app/core/services/product_service.dart';
 import 'package:crud_auth/app/models/dto/product_dto.dart';
 import 'package:crud_auth/app/models/store/product_store_dto.dart';
+import 'package:crud_auth/app/modules/home/components/dialog/edit_dialog.dart';
 import 'package:crud_auth/app/shared/util/currency_util.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 part 'product_controller.g.dart';
 
@@ -84,6 +86,43 @@ abstract class ProductControllerBase with Store {
       await loadAllProducts();
       clearAllFields();
       EasyLoading.showSuccess('Produto salvo com sucesso!');
+    } on FlutterError catch (e) {
+      _loadingController.stopLoading();
+      EasyLoading.showError(e.message);
+    }
+    _loadingController.stopLoading();
+  }
+
+  @action
+  onTapEdit(
+    int index,
+    BuildContext context,
+  ) async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return EditDialog(
+          productStore: listPrduct[index],
+          nameController: nameController,
+          priceController: priceController,
+          onPressedEdit: updateProduct,
+        );
+      },
+    ).then((value) => clearAllFields());
+  }
+
+  @action
+  Future<void> updateProduct(ProductDTO product) async {
+    _loadingController.startLoading();
+
+    hideKeyboard();
+
+    try {
+      await _productService
+          .updateProduct(product)
+          .then((_) => Modular.to.pop());
+      ;
+      EasyLoading.showSuccess('Produto editado com sucesso!');
     } on FlutterError catch (e) {
       _loadingController.stopLoading();
       EasyLoading.showError(e.message);
