@@ -120,8 +120,8 @@ abstract class ProductControllerBase with Store {
     try {
       await _productService
           .updateProduct(product)
-          .then((_) => Modular.to.pop());
-      ;
+          .then((_) => loadAllProducts());
+      Modular.to.pop();
       EasyLoading.showSuccess('Produto editado com sucesso!');
     } on FlutterError catch (e) {
       _loadingController.stopLoading();
