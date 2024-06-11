@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "327899998797",
+    "project_id": "push-deep-app",
+    "storage_bucket": "push-deep-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:327899998797:android:3683bf918c13c67ef44a04",
+        "android_client_info": {
+          "package_name": "maximo.isac.crud_auth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMhqttsnhnvr2261e1oHSUfaotv9UOaEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

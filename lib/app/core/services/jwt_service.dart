@@ -1,4 +1,5 @@
 import 'package:crud_auth/app/core/services/shared_local_storage_service.dart';
+import 'package:crud_auth/app/models/dto/token_jwt_dto.dart';
 import 'package:crud_auth/app/shared/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -63,11 +64,7 @@ class JwtService {
 
       response = await _client.post(
         '${api}auth/refresh-token',
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $jwt',
-          },
-        ),
+        data: TokenJWT(jwt).toMap(),
       );
     } on DioException catch (e) {
       _logger.e('Erro ao tentar atualizar o token JWT.', error: e);
