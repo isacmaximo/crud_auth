@@ -86,7 +86,10 @@ abstract class AuthControllerBase with Store {
     );
 
     try {
-      await _authService.register(user);
+      await _authService.register(user).then((_) {
+        Modular.to.pop();
+        EasyLoading.showSuccess('Usuário registrado com sucesso!');
+      });
     } catch (e) {
       _loadingController.stopLoading();
       EasyLoading.showError('Erro ao cadastrar');

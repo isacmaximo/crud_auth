@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'push-deep-app.appspot.com',
     iosBundleId: 'maximo.isac.crudAuth',
   );
+
 }
