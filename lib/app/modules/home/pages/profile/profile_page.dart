@@ -27,6 +27,15 @@ class ProfilePage extends StatelessWidget {
               flex: 2,
             ),
             CustomButton(
+              title: 'Enviar mensagem (para mim)',
+              onPressed: () async {
+                await _controller.sendSelfNotification();
+              },
+            ),
+            const Spacer(
+              flex: 2,
+            ),
+            CustomButton(
               title: 'Sair',
               onPressed: () async {
                 await _controller.logout();

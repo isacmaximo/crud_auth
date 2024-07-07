@@ -52,6 +52,7 @@ class JwtService {
 
   Future<void> logout() async {
     await _storageService.delete('jwt');
+    await _firebaseAuthService.signOut();
     Modular.to.pushReplacementNamed('/login');
   }
 

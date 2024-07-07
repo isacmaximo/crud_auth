@@ -3,6 +3,7 @@ import 'package:crud_auth/app/core/http/http_client.dart';
 import 'package:crud_auth/app/core/http/refresh_token_interceptor.dart';
 import 'package:crud_auth/app/core/services/auth_service.dart';
 import 'package:crud_auth/app/core/services/firebase_auth_service.dart';
+import 'package:crud_auth/app/core/services/firebase_notification_service.dart';
 import 'package:crud_auth/app/core/services/jwt_service.dart';
 import 'package:crud_auth/app/core/services/shared_local_storage_service.dart';
 import 'package:crud_auth/app/modules/auth/auth_module.dart';
@@ -25,6 +26,7 @@ class AppModule extends Module {
     i.addSingleton(RefreshTokenInterceptor.new);
     i.addSingleton(HttpClient.new);
     i.addSingleton(AuthService.new);
+    i.addLazySingleton(() => FirebaseNotificationService(i(), i(), i(), i()));
     super.binds(i);
   }
 

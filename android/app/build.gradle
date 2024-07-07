@@ -43,7 +43,7 @@ android {
 
     defaultConfig {
         applicationId "maximo.isac.crud_auth"
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 23
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
