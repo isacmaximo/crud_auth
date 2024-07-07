@@ -12,7 +12,7 @@ class DeepLinkPage extends StatelessWidget {
         Modular.to.pop();
       },
       title: 'Deep Link Page',
-      child: Center(
+      child: const Center(
         child: Text(
           'Deep Link Funcionando!',
           style: TextStyle(
