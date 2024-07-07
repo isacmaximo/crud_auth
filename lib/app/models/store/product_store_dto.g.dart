@@ -12,13 +12,13 @@ mixin _$ProductStore on ProductStoreBase, Store {
   late final _$idAtom = Atom(name: 'ProductStoreBase.id', context: context);
 
   @override
-  int? get id {
+  String? get id {
     _$idAtom.reportRead();
     return super.id;
   }
 
   @override
-  set id(int? value) {
+  set id(String? value) {
     _$idAtom.reportWrite(value, super.id, () {
       super.id = value;
     });

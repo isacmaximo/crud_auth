@@ -5,7 +5,7 @@ class ProductStore = ProductStoreBase with _$ProductStore;
 
 abstract class ProductStoreBase with Store {
   @observable
-  int? id;
+  String? id;
   @observable
   String? name;
   @observable

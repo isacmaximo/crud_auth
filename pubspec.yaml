@@ -26,6 +26,7 @@ dependencies:
   email_validator: ^2.1.17
   firebase_core: ^2.4.1
   firebase_auth: ^4.2.5
+  google_sign_in: ^6.2.1
   
 
 

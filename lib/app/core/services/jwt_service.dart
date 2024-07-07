@@ -1,3 +1,4 @@
+import 'package:crud_auth/app/core/services/firebase_auth_service.dart';
 import 'package:crud_auth/app/core/services/shared_local_storage_service.dart';
 import 'package:crud_auth/app/models/dto/token_jwt_dto.dart';
 import 'package:crud_auth/app/shared/constants.dart';
@@ -8,11 +9,12 @@ import 'package:logger/logger.dart';
 
 class JwtService {
   final Logger _logger;
+  final FirebaseAuthService _firebaseAuthService;
   final SharedLocalStorageService _storageService;
 
   late Dio _client;
 
-  JwtService(this._logger, this._storageService) {
+  JwtService(this._logger, this._firebaseAuthService, this._storageService) {
     _client = Dio();
     _client.options.headers['Content-Type'] = 'application/json';
     _client.options.headers.remove('Authorization');
@@ -54,27 +56,26 @@ class JwtService {
   }
 
   Future<bool> _refreshJwtToken() async {
-    Response? response;
-    try {
-      final jwt = await getJWT();
-      if (jwt.isEmpty) {
-        await logout();
-        return false;
+    var fbToken = await _firebaseAuthService.getFirebaseIdToken();
+
+    if (fbToken != null) {
+      Response? response;
+
+      try {
+        response = await _client.post(
+          '${api}auth/refresh-token',
+          data: TokenJWT(fbToken).toMap(),
+        );
+      } on DioException catch (e) {
+        _logger.e('Erro ao tentar atualizar o token JWT.', error: e);
       }
 
-      response = await _client.post(
-        '${api}auth/refresh-token',
-        data: TokenJWT(jwt).toMap(),
-      );
-    } on DioException catch (e) {
-      _logger.e('Erro ao tentar atualizar o token JWT.', error: e);
-    }
-
-    if (response != null && response.statusCode == 200) {
-      var jwt = response.data['token'];
-      await setJWT(jwt);
-      _logger.i('Token JWT atualizado com sucesso!');
-      return true;
+      if (response != null && response.statusCode == 200) {
+        var jwt = response.data['token'];
+        await setJWT(jwt);
+        _logger.i('Token JWT atualizado com sucesso!');
+        return true;
+      }
     }
 
     await logout();

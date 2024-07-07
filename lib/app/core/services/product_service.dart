@@ -71,7 +71,7 @@ class ProductService {
     return product;
   }
 
-  Future<void> deleteProduct(int id) async {
+  Future<void> deleteProduct(String id) async {
     String url = '${api}products/$id';
     Response? response;
 

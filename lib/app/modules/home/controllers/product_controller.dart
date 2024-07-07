@@ -150,7 +150,7 @@ abstract class ProductControllerBase with Store {
   }
 
   @action
-  Future<void> deleteProduct(int id) async {
+  Future<void> deleteProduct(String id) async {
     _loadingController.startLoading();
 
     hideKeyboard();

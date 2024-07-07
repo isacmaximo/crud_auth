@@ -51,7 +51,7 @@ class RegisterPage extends StatelessWidget {
                 title: 'Cadastrar',
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    await _controller.register();
+                    await _controller.registerWithCredentials();
                   }
                 },
               ),

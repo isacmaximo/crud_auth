@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     _controller.hideKeyboard();
-                    await _controller.login();
+                    await _controller.loginWithEmail();
                   }
                 },
               ),

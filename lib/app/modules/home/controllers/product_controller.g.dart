@@ -70,7 +70,7 @@ mixin _$ProductController on ProductControllerBase, Store {
       AsyncAction('ProductControllerBase.deleteProduct', context: context);
 
   @override
-  Future<void> deleteProduct(int id) {
+  Future<void> deleteProduct(String id) {
     return _$deleteProductAsyncAction.run(() => super.deleteProduct(id));
   }
 

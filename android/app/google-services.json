@@ -12,7 +12,20 @@
           "package_name": "maximo.isac.crud_auth"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "327899998797-555mne9qodbtf8r50vhdbcv4k02128c1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "maximo.isac.crud_auth",
+            "certificate_hash": "80b2646af89af8bb2192bba29267532c4e23f4aa"
+          }
+        },
+        {
+          "client_id": "327899998797-4n32lamusuovn4n0req9irc5ji81th9b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDMhqttsnhnvr2261e1oHSUfaotv9UOaEw"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "327899998797-4n32lamusuovn4n0req9irc5ji81th9b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "327899998797-gfce35c5k9k2e35fni2nl5ef7u0u32rn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "maximo.isac.crudAuth"
+              }
+            }
+          ]
         }
       }
     }

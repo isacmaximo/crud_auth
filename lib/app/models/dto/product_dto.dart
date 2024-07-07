@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:crud_auth/app/models/store/product_store_dto.dart';
 
 class ProductDTO {
-  int? id;
+  String? id;
   String? name;
   double? price;
   ProductDTO({
@@ -14,7 +14,7 @@ class ProductDTO {
   });
 
   ProductDTO copyWith({
-    int? id,
+    String? id,
     String? name,
     double? price,
   }) {
@@ -43,7 +43,7 @@ class ProductDTO {
 
   factory ProductDTO.fromMap(Map<String, dynamic> map) {
     return ProductDTO(
-      id: map['id'] != null ? map['id'] as int : null,
+      id: map['id'] != null ? map['id'] as String : null,
       name: map['name'] != null ? map['name'] as String : null,
       price: map['price'] != null ? map['price'] as double : null,
     );
