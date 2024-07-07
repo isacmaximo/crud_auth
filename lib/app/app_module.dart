@@ -14,7 +14,10 @@ class AppModule extends Module {
   final Logger _logger;
   final SharedLocalStorageService _localStorage;
 
-  AppModule(this._logger, this._localStorage);
+  AppModule(
+    this._logger,
+    this._localStorage,
+  );
 
   @override
   void binds(i) {

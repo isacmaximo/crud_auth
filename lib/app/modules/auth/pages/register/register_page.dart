@@ -22,7 +22,7 @@ class RegisterPage extends StatelessWidget {
           child: Column(
             children: [
               const Spacer(
-                flex: 1,
+                flex: 2,
               ),
               CustomInput(
                 hintText: 'Usuário',
@@ -43,6 +43,15 @@ class RegisterPage extends StatelessWidget {
                 controller: _controller.confirmPasswordController,
                 prefixIcon: const Icon(Icons.lock),
                 validator: _controller.confirmPasswordValidation,
+              ),
+              const Spacer(
+                flex: 1,
+              ),
+              CustomButton(
+                title: 'Cadastrar com Google',
+                onPressed: () async {
+                  await _controller.registerWithGoogle();
+                },
               ),
               const Spacer(
                 flex: 1,

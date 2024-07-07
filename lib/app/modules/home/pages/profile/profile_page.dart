@@ -27,13 +27,22 @@ class ProfilePage extends StatelessWidget {
               flex: 2,
             ),
             CustomButton(
-              title: 'Enviar mensagem (para mim)',
+              title: 'Enviar email (Deep Link)',
+              onPressed: () async {
+                await _controller.sendEmailDeepLink();
+              },
+            ),
+            const Spacer(
+              flex: 1,
+            ),
+            CustomButton(
+              title: 'Enviar Self Message (FCM)',
               onPressed: () async {
                 await _controller.sendSelfNotification();
               },
             ),
             const Spacer(
-              flex: 2,
+              flex: 1,
             ),
             CustomButton(
               title: 'Sair',

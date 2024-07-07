@@ -27,6 +27,14 @@ mixin _$ProfileController on ProfileControllerBase, Store {
         .run(() => super.sendSelfNotification());
   }
 
+  late final _$sendEmailDeepLinkAsyncAction =
+      AsyncAction('ProfileControllerBase.sendEmailDeepLink', context: context);
+
+  @override
+  Future<void> sendEmailDeepLink() {
+    return _$sendEmailDeepLinkAsyncAction.run(() => super.sendEmailDeepLink());
+  }
+
   late final _$logoutAsyncAction =
       AsyncAction('ProfileControllerBase.logout', context: context);
 

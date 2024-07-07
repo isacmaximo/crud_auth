@@ -22,7 +22,7 @@ class LoginPage extends StatelessWidget {
           child: Column(
             children: [
               const Spacer(
-                flex: 2,
+                flex: 5,
               ),
               CustomInput(
                 hintText: 'Usuário',
@@ -39,6 +39,15 @@ class LoginPage extends StatelessWidget {
               ),
               RowGoToRegister(
                 onPressed: _controller.goToRegister,
+              ),
+              const Spacer(
+                flex: 1,
+              ),
+              CustomButton(
+                title: 'Entrar com Google',
+                onPressed: () async {
+                  await _controller.loginWithGoogle();
+                },
               ),
               const Spacer(
                 flex: 1,

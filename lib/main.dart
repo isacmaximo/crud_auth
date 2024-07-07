@@ -1,6 +1,7 @@
 import 'package:crud_auth/app/app_module.dart';
 import 'package:crud_auth/app/app_widget.dart';
-import 'package:crud_auth/app/core/fcm_config/fcm_config.dart';
+import 'package:crud_auth/app/core/config/deep_link_config/deep_link_config.dart';
+import 'package:crud_auth/app/core/config/fcm_config/fcm_config.dart';
 import 'package:crud_auth/app/core/services/shared_local_storage_service.dart';
 import 'package:crud_auth/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,6 +13,7 @@ import 'package:logger/logger.dart';
 final _logger = Logger();
 final _localStorage = SharedLocalStorageService();
 final _fcmConfig = FCMConfig(_logger, _localStorage);
+final _deepLinkConfig = DeepLinkConfig();
 
 @pragma('vm:entry-point')
 Future<void> onReceiveBackgroundMessage(RemoteMessage message) async {}
@@ -22,6 +24,8 @@ void main() async {
 
   await _fcmConfig.init();
   FirebaseMessaging.onBackgroundMessage(onReceiveBackgroundMessage);
+
+  await _deepLinkConfig.initDeepLinks();
 
   runApp(
     ModularApp(
